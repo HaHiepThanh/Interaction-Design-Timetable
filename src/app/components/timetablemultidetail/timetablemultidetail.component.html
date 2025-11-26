@@ -1,4 +1,4 @@
-<div class="overlay" (click)="onClose()">
+<div class="overlay" [ngClass]="{ 'align-left': alignLeft }" (click)="onClose()">
   <div class="detail-panel" (click)="$event.stopPropagation()">
     <!-- Close button -->
     <button class="close-btn" (click)="onClose()">×</button>

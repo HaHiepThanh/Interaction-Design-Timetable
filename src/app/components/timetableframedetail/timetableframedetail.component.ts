@@ -13,6 +13,7 @@ export class TimetableframedetailComponent implements OnChanges {
   @Input() event: Event | null = null;
   @Input() selectedDate: Date | null = null;
   @Input() dateNote: string = '';
+  @Input() alignLeft: boolean = false;
   @Output() close = new EventEmitter<void>();
   @Output() saveNote = new EventEmitter<{ eventId?: string; date?: Date; note: string }>();
   @Output() toggleImportant = new EventEmitter<{ eventId: string; isImportant: boolean }>();

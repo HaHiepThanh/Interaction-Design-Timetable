@@ -21,6 +21,7 @@ export class AppComponent {
   selectedEvents: Event[] = [];
   showMultiDetail: boolean = false;
   showFilter: boolean = false;
+  alignDetailLeft: boolean = false;
 
   // Sample data based on the image
   events: Map<string, Event[]> = new Map();
@@ -341,6 +342,11 @@ export class AppComponent {
 
   onFrameClick(data: { day: number; date: Date; events: Event[] }) {
     this.selectedDate = data.date;
+
+    // dayOfWeek: 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const dayOfWeek = data.date.getDay();
+    // Move popup to left side for Thursday (4) to Sunday (0)
+    this.alignDetailLeft = (dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0);
 
     const eventsWithTime = data.events.filter(e => e.startTime && e.startTime.trim() !== '');
 

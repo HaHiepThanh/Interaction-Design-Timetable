@@ -13,6 +13,7 @@ import { Event } from '../../models/event.model';
 export class TimetablemultidetailComponent implements OnChanges {
   @Input() events: Event[] = [];
   @Input() selectedDate: Date | null = null;
+  @Input() alignLeft: boolean = false;
 
   @Output() close = new EventEmitter<void>();
   @Output() saveNote = new EventEmitter<{ eventId?: string; date?: Date; note: string }>();

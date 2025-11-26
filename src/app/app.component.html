@@ -58,6 +58,7 @@
     [event]="selectedEvent"
     [selectedDate]="selectedDate"
     [dateNote]="getDateNote(selectedDate)"
+    [alignLeft]="alignDetailLeft"
     (close)="onCloseDetail()"
     (saveNote)="onSaveNote($event)"
     (toggleImportant)="onToggleImportant($event)">
@@ -68,6 +69,7 @@
     *ngIf="showMultiDetail && selectedDate"
     [events]="selectedEvents"
     [selectedDate]="selectedDate"
+    [alignLeft]="alignDetailLeft"
     (close)="onCloseMultiDetail()"
     (saveNote)="onSaveNote($event)"
     (toggleImportant)="onToggleImportant($event)">

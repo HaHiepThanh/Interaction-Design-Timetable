@@ -1,14 +1,18 @@
 .overlay {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 60px;
   right: 0;
   bottom: 0;
 //   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
   z-index: 1000;
+}
+
+.overlay.align-left {
+  justify-content: flex-start;
 }
 
 .detail-panel {
