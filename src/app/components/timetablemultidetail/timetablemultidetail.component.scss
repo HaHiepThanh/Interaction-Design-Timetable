@@ -3,7 +3,7 @@
   top: 0;
   left: 60px;
   right: 0;
-  bottom: 0;
+  // bottom: 0;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -18,10 +18,10 @@
   background-color: white;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh;
+  max-height: 100vh;
   overflow-y: auto;
   border-radius: 12px;
-  padding: 24px;
+  padding: 12px 24px;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
@@ -72,7 +72,7 @@
   .event-row {
     display: flex;
     gap: 12px;
-    padding: 12px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #eee;
     position: relative;
 
@@ -136,6 +136,45 @@
         font-size: 13px;
         color: #666;
         line-height: 1.5;
+        margin-bottom: 8px;
+      }
+
+      .teacher-section {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        padding-top: 8px;
+        border-top: 1px solid #eee;
+
+        .label {
+          font-size: 12px;
+          font-weight: 500;
+          color: #333;
+          margin-bottom: 6px;
+        }
+
+        .teacher-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #3B82F6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+          }
+
+          span {
+            font-size: 13px;
+            color: #333;
+          }
+        }
       }
 
       .note-section {

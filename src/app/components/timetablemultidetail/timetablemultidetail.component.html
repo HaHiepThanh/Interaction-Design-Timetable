@@ -49,6 +49,15 @@
             {{ ev.description }}
           </div>
 
+          <!-- Teacher section -->
+          <div class="teacher-section" *ngIf="ev.teacher">
+            <div class="label">Teacher:</div>
+            <div class="teacher-info">
+              <div class="avatar">{{ ev.teacher.name.charAt(0) }}</div>
+              <span>{{ ev.teacher.name }}</span>
+            </div>
+          </div>
+
           <!-- Note section per event -->
           <div class="note-section">
             <div class="note-label-row">
