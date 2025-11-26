@@ -1,1 +1,77 @@
-<p>timetableframe works!</p>
+<div 
+  class="timetable-frame" 
+  [class.selected]="isSelected"
+  [class.today]="isToday"
+  [class.has-events]="hasEvents() && !hasInternshipEvent() && !hasHackathonEvent() && !hasExamEvent()"
+  [ngClass]="getFrameClass()"
+  (click)="onFrameClick()">
+  
+  <!-- Star icon in top right if important -->
+  <div class="star-icon" *ngIf="hasImportantEvent() || hasNote()">
+    <svg *ngIf="hasImportantEvent()" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </svg>
+    <!-- Note icon (Material Icons) shown when there is any note -->
+    <span *ngIf="hasNote()" class="material-icons note-icon">
+      edit_note
+    </span>
+  </div>
+
+  <!-- Events container -->
+  <div class="events-container">
+    <ng-container *ngFor="let event of events">
+      <!-- Small indicators for simple events -->
+      <div *ngIf="event.type === 'event' && !event.startTime" 
+           class="small-indicator"
+           [class.check]="event.status === 'completed'"
+           [class.cross]="event.status === 'pending'"
+           [class.number]="event.status !== 'completed' && event.status !== 'pending' && event.status !== undefined">
+        <span *ngIf="event.status === 'completed'">✓</span>
+        <span *ngIf="event.status === 'pending'">✗</span>
+        <span *ngIf="event.status !== 'completed' && event.status !== 'pending' && event.status !== undefined">{{ day }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Display for days with multiple classes (>2) -->
+    <div *ngIf="hasMultipleClasses()" class="multiple-classes-container">
+      <div [ngClass]="getEventClass(getEventsWithTime()[0])">
+        <div class="event-header">
+          <div class="event-icon">
+            <ng-container *ngIf="getEventsWithTime()[0]?.title === 'Python'; else firstIconText">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNghUjM5ct10-zw9HdcDhmh4uohnyHQ7caHQ&s" alt="Python logo" />
+            </ng-container>
+            <ng-template #firstIconText>{{ getFirstEventIcon() }}</ng-template>
+          </div>
+          <span class="event-count">+{{ getMultipleClassesCount() }}</span>
+        </div>
+        <div class="event-title">{{ getEventsWithTime()[0].title }}</div>
+        <!-- List all time slots -->
+        <div class="time-slots">
+          <div *ngFor="let event of getEventsWithTime()" class="time-slot">
+            {{ event.startTime }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display for days with 1-2 classes -->
+    <ng-container *ngIf="!hasMultipleClasses()">
+      <ng-container *ngFor="let event of getEventsWithTime()">
+        <div [ngClass]="getEventClass(event)"> 
+          <div class="event-icon" *ngIf="event.title === 'Python'">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNghUjM5ct10-zw9HdcDhmh4uohnyHQ7caHQ&s" alt="Python logo" />
+          </div>
+          <div class="event-icon" *ngIf="event.title !== 'Python' && event.icon">
+            {{ event.icon }}
+          </div>
+          <div class="event-title">{{ event.title }}</div>
+          <div class="event-time">{{ event.startTime }}</div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- Day number in bottom right -->
+  <div class="day-number-bottom" *ngIf="day > 0">{{ day }}</div>
+</div>
+

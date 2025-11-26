@@ -1,0 +1,245 @@
+.timetable-frame {
+  min-height: 0;
+  height: 100%;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+
+  &:hover {
+    background-color: #f9f9f9;
+    border-color: #bdbdbd;
+  }
+
+  &.selected {
+    border: 3px solid #3B82F6;
+    background-color: #f0f7ff;
+  }
+
+  &.today {
+    border-color: #3B82F6;
+  }
+
+  &.has-events {
+    background-color: #E3F2FD;
+  }
+
+  // Internship frame colors
+  &.has-internship {
+    &.internship-1 {
+      background-color: #FFF9C4; // Yellow for first internship
+    }
+    &.internship-default {
+      background-color: #FFE0B2; // Orange for other internships
+    }
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  // Hackathon frame colors
+  &.has-hackathon {
+    &.hackathon-1 {
+      background-color: #E1BEE7; // Light purple for first hackathon
+    }
+    &.hackathon-2 {
+      background-color: #C5CAE9; // Light indigo for second hackathon
+    }
+    &.hackathon-default {
+      background-color: #F3E5F5; // Default purple
+    }
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  // Exam frame color
+  &.has-exam {
+    background-color: #FFCDD2; // Light red for exams
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .star-icon {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    color: #FFD700;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .note-icon {
+      font-size: 16px;
+      line-height: 1;
+      margin-top: 2px;
+      color: #4B5563;
+    }
+  }
+
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+
+    .day-number {
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+    }
+  }
+
+  .events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .event-item {
+    padding: 5px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    position: relative;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    flex-shrink: 0;
+
+    &.class-event {
+      background-color: #E3F2FD;
+    }
+
+    &.regular-event {
+      background-color: #F3E5F5;
+    }
+
+    // For special day types, use full frame background color (no inner white card)
+    &.internship-event,
+    &.hackathon-event,
+    &.exam-event {
+      background-color: transparent;
+    }
+
+  }
+
+  // Small event indicators (for checkmarks, X, numbers)
+  .small-indicator {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    align-self: flex-start;
+    flex-shrink: 0;
+
+    &.check {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    &.cross {
+      background-color: #F44336;
+      color: white;
+    }
+
+    &.number {
+      background-color: #2196F3;
+      color: white;
+    }
+  }
+
+  .day-number-bottom {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+  }
+}
+
+.event-icon {
+    font-size: 28px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+}
+
+.event-time {
+    font-weight: 600;
+    min-width: 40px;
+    font-size: 10px;
+}
+
+.event-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+}
+
+.multiple-classes-container {
+  .event-item {
+    .event-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+
+      .event-icon {
+        font-size: 20px;
+      }
+
+      .event-count {
+        font-size: 10px;
+        font-weight: 600;
+        color: #666;
+      }
+    }
+
+    .time-slots {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 4px;
+
+      .time-slot {
+        font-size: 9px;
+        color: #666;
+        font-weight: 500;
+      }
+    }
+  }
+}

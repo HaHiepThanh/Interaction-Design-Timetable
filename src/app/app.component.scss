@@ -1,0 +1,129 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #fafafa;
+  overflow: hidden;
+}
+
+.header {
+  padding: 20px 24px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+
+  .breadcrumbs {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .month-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    //   flex: 1;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #666;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f9f9f9;
+        border-color: #bbb;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.day-headers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+
+  .day-header {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    padding: 8px 0;
+  }
+}
+
+.calendar-rows {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+//   gap: 8px;
+  overflow: hidden;
+}
+
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+//   gap: 8px;
+  flex: 1;
+  min-height: 0;
+
+  app-timetableframe {
+    // border-radius: 8px;
+    overflow: hidden;
+  }
+}
+

@@ -1,0 +1,37 @@
+<div class="filter-dropdown">
+  <div class="filter-panel">
+    <button class="close-btn" type="button" (click)="onClose()">×</button>
+
+    <div class="header">
+      <h2>Filter timetable</h2>
+      <p class="subtitle">Filter by semester and academic year</p>
+    </div>
+
+    <div class="form-group">
+      <label for="semester">Semester</label>
+      <select id="semester" [(ngModel)]="semester">
+        <option value="">All</option>
+        <option value="spring">Spring</option>
+        <option value="summer">Summer</option>
+        <option value="fall">Fall</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="year">Year</label>
+      <select id="year" [(ngModel)]="year">
+        <option value="">All</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button class="btn-cancel" type="button" (click)="onClose()">Cancel</button>
+      <button class="btn-apply" type="button" (click)="onApply()">Apply</button>
+    </div>
+  </div>
+</div>
+
+

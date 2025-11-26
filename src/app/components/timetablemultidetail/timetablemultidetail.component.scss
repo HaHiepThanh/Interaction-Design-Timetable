@@ -1,0 +1,210 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1000;
+}
+
+.detail-panel {
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .header {
+    margin-bottom: 20px;
+
+    .date {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .event-row {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .star-icon {
+      position: absolute;
+      top: 10px;
+      right: 52px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .event-icon-large {
+      font-size: 32px;
+      width: 40px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .event-info {
+      flex: 1;
+
+      .event-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 4px;
+      }
+
+      .event-time {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #666;
+        font-size: 13px;
+        margin-bottom: 4px;
+
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+      .event-description {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+      }
+
+      .note-section {
+        margin-top: 8px;
+
+        .note-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 6px;
+
+          label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin: 0;
+          }
+
+          .edit-note-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+
+            &:hover {
+              background-color: #f0f0f0;
+              color: #333;
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+
+        textarea {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          font-size: 13px;
+          font-family: inherit;
+          resize: vertical;
+          margin-bottom: 8px;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+            border-color: #3B82F6;
+          }
+
+          &[readonly] {
+            background-color: #f9f9f9;
+            cursor: default;
+          }
+        }
+
+        .save-note-btn {
+          background-color: #3B82F6;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #2563EB;
+          }
+        }
+      }
+    }
+  }
+}
