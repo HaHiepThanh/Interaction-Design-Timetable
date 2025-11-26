@@ -33,24 +33,19 @@
     </ng-container>
 
     <!-- Display for days with multiple classes (>2) -->
-    <div *ngIf="hasMultipleClasses()" class="multiple-classes-container">
-      <div [ngClass]="getEventClass(getEventsWithTime()[0])">
-        <div class="event-header">
-          <div class="event-icon">
-            <ng-container *ngIf="getEventsWithTime()[0]?.title === 'Python'; else firstIconText">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNghUjM5ct10-zw9HdcDhmh4uohnyHQ7caHQ&s" alt="Python logo" />
-            </ng-container>
-            <ng-template #firstIconText>{{ getFirstEventIcon() }}</ng-template>
-          </div>
-          <span class="event-count">+{{ getMultipleClassesCount() }}</span>
+    <div *ngIf="hasMultipleClasses()" class="multiple-classes-icons">
+      <div 
+        class="class-icon" 
+        *ngFor="let event of getEventsWithTime()">
+        <div class="event-icon">
+          <ng-container *ngIf="event.title === 'Python'; else multiIconText">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNghUjM5ct10-zw9HdcDhmh4uohnyHQ7caHQ&s" alt="Python logo" />
+          </ng-container>
+          <ng-template #multiIconText>
+            {{ event.icon }}
+          </ng-template>
         </div>
-        <div class="event-title">{{ getEventsWithTime()[0].title }}</div>
-        <!-- List all time slots -->
-        <div class="time-slots">
-          <div *ngFor="let event of getEventsWithTime()" class="time-slot">
-            {{ event.startTime }}
-          </div>
-        </div>
+        <div class="event-time">{{ event.startTime }}</div>
       </div>
     </div>
 

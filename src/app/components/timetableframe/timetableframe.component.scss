@@ -190,56 +190,56 @@
     font-size: 28px;
 
     img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-      display: block;
+      width: 30px;
+      height: 30px;
+      // object-fit: contain;
+      // display: block;
     }
 }
 
 .event-time {
     font-weight: 600;
     min-width: 40px;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .event-title {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 11px;
+    font-size: 12px;
 }
 
-.multiple-classes-container {
-  .event-item {
-    .event-header {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 4px;
+.multiple-classes-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  margin-left: 8px;
 
-      .event-icon {
-        font-size: 20px;
-      }
+  .class-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex-shrink: 0;
 
-      .event-count {
-        font-size: 10px;
-        font-weight: 600;
-        color: #666;
+    .event-icon {
+      font-size: 22px;
+
+      img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        display: block;
       }
     }
 
-    .time-slots {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-top: 4px;
-
-      .time-slot {
-        font-size: 9px;
-        color: #666;
-        font-weight: 500;
-      }
+    .event-time {
+      font-size: 13px;
+      font-weight: 500;
+      color: #333333;
     }
   }
 }
