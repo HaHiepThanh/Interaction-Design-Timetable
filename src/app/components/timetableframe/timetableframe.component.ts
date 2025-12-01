@@ -14,6 +14,8 @@ export class TimetableframeComponent {
   @Input() events: Event[] = [];
   @Input() isSelected: boolean = false;
   @Input() isToday: boolean = false;
+  @Input() dateNote: string = '';
+  @Input() isDateImportant: boolean = false;
   @Output() frameClick = new EventEmitter<{ day: number; date: Date; events: Event[] }>();
 
   onFrameClick() {
@@ -63,11 +65,16 @@ export class TimetableframeComponent {
   }
 
   hasImportantEvent(): boolean {
-    return this.events.some(event => event.isImportant);
+    // Check for important events or important date
+    return this.events.some(event => event.isImportant) || this.isDateImportant;
   }
 
   hasNote(): boolean {
-    return this.events.some(event => event.note && event.note.trim());
+    // Check for notes in events
+    const hasEventNote = this.events.some(event => event.note && event.note.trim());
+    // Check for date note (from timetablemultidetail)
+    const hasDateNote = !!(this.dateNote && this.dateNote.trim() !== '');
+    return hasEventNote || hasDateNote;
   }
 
   hasEvents(): boolean {

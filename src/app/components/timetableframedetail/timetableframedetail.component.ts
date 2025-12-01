@@ -14,9 +14,10 @@ export class TimetableframedetailComponent implements OnChanges {
   @Input() selectedDate: Date | null = null;
   @Input() dateNote: string = '';
   @Input() alignLeft: boolean = false;
+  @Input() isDateImportant: boolean = false;
   @Output() close = new EventEmitter<void>();
   @Output() saveNote = new EventEmitter<{ eventId?: string; date?: Date; note: string }>();
-  @Output() toggleImportant = new EventEmitter<{ eventId: string; isImportant: boolean }>();
+  @Output() toggleImportant = new EventEmitter<{ eventId?: string; date?: Date; isImportant: boolean }>();
 
   noteText: string = '';
   isImportant: boolean = false;
@@ -29,8 +30,9 @@ export class TimetableframedetailComponent implements OnChanges {
       this.isImportant = this.event.isImportant || false;
       this.isNoteSaved = !!(this.event.note && this.event.note.trim());
       this.isNoteEditable = !this.isNoteSaved;
-    } else if (changes['dateNote']) {
+    } else if (changes['dateNote'] || changes['isDateImportant']) {
       this.noteText = this.dateNote || '';
+      this.isImportant = this.isDateImportant || false;
       this.isNoteSaved = !!(this.dateNote && this.dateNote.trim());
       this.isNoteEditable = !this.isNoteSaved;
     }
@@ -97,6 +99,12 @@ export class TimetableframedetailComponent implements OnChanges {
     if (this.event) {
       this.toggleImportant.emit({
         eventId: this.event.id,
+        isImportant: this.isImportant
+      });
+    } else if (this.selectedDate) {
+      // Toggle important for date without event
+      this.toggleImportant.emit({
+        date: this.selectedDate,
         isImportant: this.isImportant
       });
     }

@@ -50,11 +50,39 @@
   .header {
     margin-bottom: 20px;
 
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
     .date {
       font-size: 16px;
       color: #333;
       font-weight: 500;
-      margin-bottom: 4px;
+    }
+
+    .star-icon-header {
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      margin-right: 20px;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .subtitle {
@@ -78,19 +106,6 @@
 
     &:last-child {
       border-bottom: none;
-    }
-
-    .star-icon {
-      position: absolute;
-      top: 10px;
-      right: 52px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .event-icon-large {

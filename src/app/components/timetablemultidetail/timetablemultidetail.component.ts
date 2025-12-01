@@ -20,8 +20,8 @@ export class TimetablemultidetailComponent implements OnChanges {
   @Output() saveNote = new EventEmitter<{ eventId?: string; date?: Date; note: string }>();
   @Output() toggleImportant = new EventEmitter<{ eventId: string; isImportant: boolean }>();
 
-  // State per event
-  importantStates: { [eventId: string]: boolean } = {};
+  // Single important state for all events
+  isImportantSingle: boolean = false;
   
   // Single note state for all events
   noteTextSingle: string = '';
@@ -30,9 +30,8 @@ export class TimetablemultidetailComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['events'] && this.events) {
-      for (const ev of this.events) {
-        this.importantStates[ev.id] = !!ev.isImportant;
-      }
+      // Check if any event is important
+      this.isImportantSingle = this.events.some(ev => ev.isImportant);
     }
     // Initialize single note from dateNote input, or from first event's note, or empty
     if (changes['dateNote'] || changes['events']) {
@@ -68,14 +67,16 @@ export class TimetablemultidetailComponent implements OnChanges {
     this.isNoteEditableSingle = true;
   }
 
-  onToggleImportantFor(ev: Event) {
-    const current = !!this.importantStates[ev.id];
-    const next = !current;
-    this.importantStates[ev.id] = next;
-    this.toggleImportant.emit({
-      eventId: ev.id,
-      isImportant: next
-    });
+  onToggleImportantSingle() {
+    const next = !this.isImportantSingle;
+    this.isImportantSingle = next;
+    // Toggle important for all events
+    for (const ev of this.events) {
+      this.toggleImportant.emit({
+        eventId: ev.id,
+        isImportant: next
+      });
+    }
   }
 
   get formattedDate(): string {

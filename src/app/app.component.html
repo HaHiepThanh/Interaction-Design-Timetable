@@ -43,6 +43,8 @@
             [day]="isDateInCurrentMonth(date) ? date.getDate() : 0"
             [date]="date"
             [events]="getEventsForDate(date)"
+            [dateNote]="getDateNote(date)"
+            [isDateImportant]="isDateImportant(date)"
             [isSelected]="isSelected(date)"
             [isToday]="isToday(date)"
             (frameClick)="onFrameClick($event)">
@@ -58,6 +60,7 @@
     [event]="selectedEvent"
     [selectedDate]="selectedDate"
     [dateNote]="getDateNote(selectedDate)"
+    [isDateImportant]="isDateImportant(selectedDate)"
     [alignLeft]="alignDetailLeft"
     (close)="onCloseDetail()"
     (saveNote)="onSaveNote($event)"

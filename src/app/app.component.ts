@@ -27,6 +27,8 @@ export class AppComponent {
   events: Map<string, Event[]> = new Map();
   // Store notes by date (for days without events)
   dateNotes: Map<string, string> = new Map();
+  // Store important dates (for days without events)
+  importantDates: Map<string, boolean> = new Map();
 
   constructor() {
     this.initializeEvents();
@@ -392,13 +394,23 @@ export class AppComponent {
     }
   }
 
-  onToggleImportant(data: { eventId: string; isImportant: boolean }) {
-    // Update event importance
-    for (const [dateKey, events] of this.events.entries()) {
-      const event = events.find(e => e.id === data.eventId);
-      if (event) {
-        event.isImportant = data.isImportant;
-        break;
+  onToggleImportant(data: { eventId?: string; date?: Date; isImportant: boolean }) {
+    if (data.eventId) {
+      // Update event importance
+      for (const [dateKey, events] of this.events.entries()) {
+        const event = events.find(e => e.id === data.eventId);
+        if (event) {
+          event.isImportant = data.isImportant;
+          break;
+        }
+      }
+    } else if (data.date) {
+      // Update date importance (for days without events)
+      const dateKey = this.getDateKey(data.date);
+      if (data.isImportant) {
+        this.importantDates.set(dateKey, true);
+      } else {
+        this.importantDates.delete(dateKey);
       }
     }
   }
@@ -425,5 +437,11 @@ export class AppComponent {
     if (!date) return '';
     const dateKey = this.getDateKey(date);
     return this.dateNotes.get(dateKey) || '';
+  }
+
+  isDateImportant(date: Date | null): boolean {
+    if (!date) return false;
+    const dateKey = this.getDateKey(date);
+    return this.importantDates.get(dateKey) || false;
   }
 }
