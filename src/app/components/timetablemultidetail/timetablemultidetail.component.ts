@@ -14,26 +14,35 @@ export class TimetablemultidetailComponent implements OnChanges {
   @Input() events: Event[] = [];
   @Input() selectedDate: Date | null = null;
   @Input() alignLeft: boolean = false;
+  @Input() dateNote: string = '';
 
   @Output() close = new EventEmitter<void>();
   @Output() saveNote = new EventEmitter<{ eventId?: string; date?: Date; note: string }>();
   @Output() toggleImportant = new EventEmitter<{ eventId: string; isImportant: boolean }>();
 
   // State per event
-  noteTexts: { [eventId: string]: string } = {};
-  isNoteSaved: { [eventId: string]: boolean } = {};
-  isNoteEditable: { [eventId: string]: boolean } = {};
   importantStates: { [eventId: string]: boolean } = {};
+  
+  // Single note state for all events
+  noteTextSingle: string = '';
+  isNoteSavedSingle: boolean = false;
+  isNoteEditableSingle: boolean = true;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['events'] && this.events) {
       for (const ev of this.events) {
-        this.noteTexts[ev.id] = ev.note || '';
-        const saved = !!(ev.note && ev.note.trim());
-        this.isNoteSaved[ev.id] = saved;
-        this.isNoteEditable[ev.id] = !saved;
         this.importantStates[ev.id] = !!ev.isImportant;
       }
+    }
+    // Initialize single note from dateNote input, or from first event's note, or empty
+    if (changes['dateNote'] || changes['events']) {
+      this.noteTextSingle = this.dateNote || '';
+      if (!this.noteTextSingle && this.events) {
+        const firstEventWithNote = this.events.find(ev => ev.note && ev.note.trim());
+        this.noteTextSingle = firstEventWithNote?.note || '';
+      }
+      this.isNoteSavedSingle = !!(this.noteTextSingle && this.noteTextSingle.trim());
+      this.isNoteEditableSingle = !this.isNoteSavedSingle;
     }
   }
 
@@ -41,19 +50,22 @@ export class TimetablemultidetailComponent implements OnChanges {
     this.close.emit();
   }
 
-  onSaveNoteFor(ev: Event) {
-    const note = this.noteTexts[ev.id] || '';
-    this.saveNote.emit({
-      eventId: ev.id,
-      note
-    });
+  onSaveNoteSingle() {
+    const note = this.noteTextSingle || '';
+    // Save note for the selected date (not per event)
+    if (this.selectedDate) {
+      this.saveNote.emit({
+        date: this.selectedDate,
+        note
+      });
+    }
     const saved = !!(note && note.trim());
-    this.isNoteSaved[ev.id] = saved;
-    this.isNoteEditable[ev.id] = false;
+    this.isNoteSavedSingle = saved;
+    this.isNoteEditableSingle = false;
   }
 
-  onEditNoteFor(ev: Event) {
-    this.isNoteEditable[ev.id] = true;
+  onEditNoteSingle() {
+    this.isNoteEditableSingle = true;
   }
 
   onToggleImportantFor(ev: Event) {

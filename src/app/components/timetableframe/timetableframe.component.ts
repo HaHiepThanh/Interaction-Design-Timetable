@@ -112,19 +112,20 @@ export class TimetableframeComponent {
   }
 
   getFrameClass(): string {
+    const dateKey = this.getDateKey(this.date);
+    
     // Priority: exam > internship > hackathon
-    if (this.hasExamEvent()) {
+    // Check for special exam dates (2023-05-11 and 2023-05-25)
+    if (this.hasExamEvent() || dateKey === '2023-05-11' || dateKey === '2023-05-25') {
       return 'has-exam';
     }
     if (this.hasInternshipEvent()) {
-      const dateKey = this.getDateKey(this.date);
       if (dateKey === '2023-05-24') {
         return 'has-internship internship-1';
       }
       return 'has-internship internship-default';
     }
     if (this.hasHackathonEvent()) {
-      const dateKey = this.getDateKey(this.date);
       if (dateKey === '2023-05-12') {
         return 'has-hackathon hackathon-1';
       } else if (dateKey === '2023-05-29') {
@@ -133,5 +134,26 @@ export class TimetableframeComponent {
       return 'has-hackathon hackathon-default';
     }
     return '';
+  }
+
+  isSpecialExamDate(): boolean {
+    const dateKey = this.getDateKey(this.date);
+    return dateKey === '2023-05-11' || dateKey === '2023-05-25';
+  }
+
+  getEventTitleWithExam(event: Event): string {
+    const dateKey = this.getDateKey(this.date);
+    if (dateKey === '2023-05-11' && event.title === 'Python') {
+      return 'Python | Exam';
+    }
+    return event.title;
+  }
+
+  shouldShowExamText(event: Event): boolean {
+    const dateKey = this.getDateKey(this.date);
+    if (dateKey === '2023-05-25') {
+      return event.startTime === '09:00' || event.startTime === '15:00';
+    }
+    return false;
   }
 }

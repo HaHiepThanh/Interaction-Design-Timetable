@@ -153,19 +153,6 @@ export class AppComponent {
       teacher: { name: 'Johnson R.K.' }
     });
 
-    // May 20th - Exam
-    this.addEvent('2023-05-20', {
-      id: 'exam1',
-      title: 'Exam',
-      time: '14:00',
-      startTime: '14:00',
-      endTime: '16:00',
-      description: 'Final Examination',
-      date: new Date(2023, 4, 20),
-      type: 'exam',
-      icon: '📝'
-    });
-
     // May 23rd - Multiple classes (2 môn)
     this.addEvent('2023-05-23', {
       id: '8',
@@ -276,27 +263,27 @@ export class AppComponent {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const days: Date[] = [];
-    
+
     // Get first day of week (Monday = 0)
     const startDay = (firstDay.getDay() + 6) % 7; // Convert Sunday=0 to Monday=0
-    
+
     // Add empty cells for days before month starts
     for (let i = 0; i < startDay; i++) {
       days.push(new Date(year, month, -i));
     }
-    
+
     // Add all days of the month
     for (let day = 1; day <= lastDay.getDate(); day++) {
       days.push(new Date(year, month, day));
     }
-    
+
     return days;
   }
 
   getWeekRows(): Date[][] {
     const days = this.getDaysInMonth();
     const rows: Date[][] = [];
-    
+
     // Only show 5 rows
     for (let i = 0; i < 5; i++) {
       const week = days.slice(i * 7, (i + 1) * 7);
@@ -304,7 +291,7 @@ export class AppComponent {
         rows.push(week);
       }
     }
-    
+
     return rows;
   }
 
@@ -323,21 +310,21 @@ export class AppComponent {
 
   isDateInCurrentMonth(date: Date): boolean {
     return date.getMonth() === this.currentMonth.getMonth() &&
-           date.getFullYear() === this.currentMonth.getFullYear();
+      date.getFullYear() === this.currentMonth.getFullYear();
   }
 
   isToday(date: Date): boolean {
     const today = new Date();
     return date.getDate() === today.getDate() &&
-           date.getMonth() === today.getMonth() &&
-           date.getFullYear() === today.getFullYear();
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
   }
 
   isSelected(date: Date): boolean {
     if (!this.selectedDate) return false;
     return date.getDate() === this.selectedDate.getDate() &&
-           date.getMonth() === this.selectedDate.getMonth() &&
-           date.getFullYear() === this.selectedDate.getFullYear();
+      date.getMonth() === this.selectedDate.getMonth() &&
+      date.getFullYear() === this.selectedDate.getFullYear();
   }
 
   onFrameClick(data: { day: number; date: Date; events: Event[] }) {
@@ -417,8 +404,8 @@ export class AppComponent {
   }
 
   getMonthName(): string {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
     return months[this.currentMonth.getMonth()];
   }
 

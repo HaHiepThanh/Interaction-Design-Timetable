@@ -60,12 +60,20 @@
     }
   }
 
-  // Exam frame color
+  // Exam frame color (for 2023-05-11, 2023-05-25, and actual exam events)
   &.has-exam {
     background-color: #FFCDD2; // Light red for exams
     
     &:hover {
       opacity: 0.9;
+    }
+
+    // Remove blue background from event items inside exam frame
+    .event-item {
+      &.class-event,
+      &.regular-event {
+        background-color: transparent;
+      }
     }
   }
 
@@ -213,7 +221,6 @@
 .multiple-classes-icons {
   display: flex;
   flex-direction: row;
-  align-items: center;
   gap: 8px;
   margin-top: 2px;
   margin-left: 8px;
@@ -240,6 +247,12 @@
       font-size: 13px;
       font-weight: 500;
       color: #333333;
+    }
+
+    .exam-text {
+      font-size: 11px;
+      color: #666;
+      margin-top: 2px;
     }
   }
 }

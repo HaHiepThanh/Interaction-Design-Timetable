@@ -46,6 +46,7 @@
           </ng-template>
         </div>
         <div class="event-time">{{ event.startTime }}</div>
+        <div class="exam-text" *ngIf="shouldShowExamText(event)">exam</div>
       </div>
     </div>
 
@@ -59,7 +60,7 @@
           <div class="event-icon" *ngIf="event.title !== 'Python' && event.icon">
             {{ event.icon }}
           </div>
-          <div class="event-title">{{ event.title }}</div>
+          <div class="event-title">{{ getEventTitleWithExam(event) }}</div>
           <div class="event-time">{{ event.startTime }}</div>
         </div>
       </ng-container>
